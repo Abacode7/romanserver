@@ -26,7 +26,7 @@ func main() {
 			} 
 			
 
-			if argVal < 1 || argVal > 10{
+			if argVal < 1 || argVal > 20{
 				w.WriteHeader(http.StatusNotFound)
 				w.Write([]byte("404 - Not found. Resource for the given argument not found."))
 			}else{
