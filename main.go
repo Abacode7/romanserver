@@ -17,9 +17,7 @@ func main() {
 	// Define paths and functions
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		paths := strings.Split(r.URL.Path, "/")
-		fmt.Println("Paths: ")
-		fmt.Println(paths)
-		fmt.Println(paths[1] == "")
+
 		if paths[1] == "roman_numerals" {
 			argVal, err := strconv.Atoi(paths[2])
 			if err != nil {
