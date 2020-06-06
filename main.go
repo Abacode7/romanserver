@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"html"
 	"net/http"
+	"os"
 	"strconv"
 	"strings"
 	"time"
@@ -38,9 +39,12 @@ func main() {
 		}
 	})
 
+	/// Get application port
+	port := getPort()
+
 	// Create server object
 	server := &http.Server{
-		Addr:           ":8080",
+		Addr:           port,
 		ReadTimeout:    10 * time.Second,
 		WriteTimeout:   10 * time.Second,
 		MaxHeaderBytes: 1 << 20,
@@ -49,4 +53,13 @@ func main() {
 	// Start server
 	fmt.Println("Starting server...")
 	server.ListenAndServe()
+}
+
+/// getPort allows us use the custom port provided by heroku
+func getPort() string {
+	port := os.Getenv("PORT")
+	if port != ""{
+		return ":" + port
+	}
+	return ":8080"
 }
