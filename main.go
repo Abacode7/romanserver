@@ -17,7 +17,9 @@ func main() {
 	// Define paths and functions
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		paths := strings.Split(r.URL.Path, "/")
-
+		fmt.Println("Paths: ")
+		fmt.Println(paths)
+		fmt.Println(paths[1] == "")
 		if paths[1] == "roman_numerals" {
 			argVal, err := strconv.Atoi(paths[2])
 			if err != nil {
@@ -33,7 +35,10 @@ func main() {
 				fmt.Fprintf(w, "%q", html.EscapeString(romannumerals.Numerals[argVal]))
 			}
 
-		} else {
+		} else if paths[1] == ""{
+			w.WriteHeader(http.StatusOK)
+			w.Write([]byte("Welcome - Roman server generates roman numerals for given numbers using path /roman_numerals/{number}"))
+		} else{
 			w.WriteHeader(http.StatusBadRequest)
 			w.Write([]byte("400 - Bad request. Pls check your url path."))
 		}
