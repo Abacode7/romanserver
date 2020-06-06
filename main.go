@@ -40,7 +40,10 @@ func main() {
 	})
 
 	/// Get application port
+	fmt.Println("Getting application port...")
 	port := getPort()
+
+	fmt.Println("Application to be started on port: ", port)
 
 	// Create server object
 	server := &http.Server{
